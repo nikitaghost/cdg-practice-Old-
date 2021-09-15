@@ -1,6 +1,4 @@
-puts "Enter word:"
-word = gets.chop
-word = word.strip
+require "rspec"
 
 def exponentiationOrReverse(word)
   size = word.size
@@ -13,34 +11,41 @@ def exponentiationOrReverse(word)
 
 end
 
-puts exponentiationOrReverse(word)
-
-#Второе задание
-
-puts "Enter num of pokemons:"
-numOfPokemons = gets.to_i
-
-def addToPokemonsHash(numOfPokemons)
+def addToPokemonsArray()
   pokemonHash = nil
   name = nil
   color = nil
 
+  puts "Enter num of pokemons:"
+  numOfPokemons = gets.to_i
+
   pokemonsArr = []
 
-  for i in 1..numOfPokemons do
-    puts "Enter name:"
-    name = gets.chop
-    puts "Enter color:"
-    color = gets.chop
+   for i in 1..numOfPokemons do
+      name = gets.chomp
+      color = gets.chomp
 
-    pokemonHash = {"name" => name, "color" => color}
-    pokemonsArr.push(pokemonHash)
+      pokemonHash = {name: name, color: color}
+      pokemonsArr.push(pokemonHash)
   end
 
   return pokemonsArr
 
 end
 
-pokemonsArr = addToPokemonsHash(numOfPokemons)
+RSpec.describe "Main" do
+    it "exponentiationOrReverse CSS=>SSC" do
+        expect(exponentiationOrReverse("CSS")).to eq("SSC")
+    end
 
-puts pokemonsArr
+    it "exponentiationOrReverse CSCS=>16" do
+        expect(exponentiationOrReverse("CSCS")).to eq(16)
+    end
+
+    it "#addToPokemonsArray" do
+        allow_any_instance_of(Kernel).to receive(:gets).and_return(2, "Cho", "Green", "Wi", "Yellow")
+        expect(addToPokemonsArray).to eq([{name: "Cho", color: "Green"}, {name: "Wi", color: "Yellow"}])
+    end
+end
+
+
