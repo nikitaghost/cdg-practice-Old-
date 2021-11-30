@@ -30,7 +30,7 @@ end
 
 def deposit()
     puts "Введите сумму депозита: "
-    puts "Минимум 0"
+    puts "Минимум 1"
 
     amount = gets.to_f
 
@@ -46,7 +46,7 @@ end
 
 def withdraw()
     puts "Введите сумму вывода: "
-    puts "Минимум 0, максимум #{$balance}"
+    puts "Минимум 1, максимум #{$balance}"
 
     amount = gets.to_f
 
@@ -64,7 +64,6 @@ end
 def balance()
 
     puts "Баланс: #{$balance}"
-
     menu()
     
 end

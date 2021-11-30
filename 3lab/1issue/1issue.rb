@@ -1,8 +1,5 @@
-require "rspec"
-
 $usersPath = "users.txt"
 $buffer = "buffer.txt"
-$resultsPath = "results.txt"
 
 def index()
     File.foreach($usersPath) { |user| puts user }
@@ -10,10 +7,8 @@ end
 
 def find(id)
     File.foreach($usersPath).with_index do |user, index|
-        @text = user if (index == id)
+        puts user if index == id
     end
-
-    @text
 end
 
 def where(pattern)
@@ -41,7 +36,7 @@ def delete(id)
     
     file = File.open($buffer, 'w')
     File.foreach($usersPath).with_index do |str, index|
-        file.puts(id == index ? "" : str)
+        file.puts str if id != index
     end
 
     file.close
@@ -50,6 +45,3 @@ def delete(id)
     File.delete($buffer) if File.exist?($buffer)
 
 end
-
-puts (find(4))
-delete(4)
