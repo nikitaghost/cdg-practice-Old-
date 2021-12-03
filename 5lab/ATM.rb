@@ -57,8 +57,6 @@ class ATM
 
     def call(value, env)
 		req = Rack::Request.new(env)
-        p req
-        p req.env
         case req.path
 		when '/deposit'
             answer = deposit(value)
@@ -86,7 +84,6 @@ while connection = server.accept
     @value = nil
     if full_path.split('?')[1] != nil
         params = full_path.split('?')[1].split('&') if full_path.split('?')[1] != nil
-        p params
         params.each do |var|
             if var.split('=')[0] == "value"
                 @value = var.split('=')[1] if var.split('=')[0] == "value"
