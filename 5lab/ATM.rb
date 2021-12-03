@@ -56,21 +56,21 @@ class ATM
     end
 
     def call(value, env)
-		req = Rack::Request.new(env)
+        req = Rack::Request.new(env)
         case req.path
-		when '/deposit'
+        when '/deposit'
             answer = deposit(value)
-			[answer[:code], {'Content-Type' => 'text/html'}, [answer[:text]]]
-		when '/withdraw'
+            [answer[:code], {'Content-Type' => 'text/html'}, [answer[:text]]]
+        when '/withdraw'
             answer = withdraw(value)
-			[answer[:code], {'Content-Type' => 'text/html'}, [answer[:text]]]
+            [answer[:code], {'Content-Type' => 'text/html'}, [answer[:text]]]
         when '/balance'
             answer = balance()
             [answer[:code], {'Content-Type' => 'text/html'}, [answer[:text]]]
-		else
-			[404, {'Content-Type' => 'text/html'}, ["Not found"]]
-		end
-	end
+        else
+            [404, {'Content-Type' => 'text/html'}, ["Not found"]]
+        end
+    end
 
 end
 
