@@ -13,18 +13,18 @@ class ATM
     end
 
     def balance
-        puts "Balance is #{@balance}"
+        puts "Баланс: #{@balance}"
         menu()
     end
     
     def deposit()
-        puts "Enter the deposit amount: "
-        puts "Min 1"
+        puts "Введите сумму депозита: "
+        puts "Минимум 1"
 
         amount = gets.to_f
 
         if amount <= 0
-            puts "The deposit amount must be greater than 0!"
+            puts "Сумма депозита должна быть больше 0!"
             deposit()
         else
             @balance += amount
@@ -35,12 +35,12 @@ class ATM
     def withdraw()
 
         if @balance <= 0
-            puts "There is no money in your account." 
+            puts "На вашем счете нет денег." 
             menu()
         end
 
-        puts "Enter the withdrawal amount: "
-        puts "Min 1, Max #{$balance}"
+        puts "Введите сумму вывода: "
+        puts "Минимум 1, максимум #{@balance}"
 
         amount = gets.to_f
 
@@ -48,7 +48,7 @@ class ATM
             @balance -= amount
             balance()
         else
-            puts "The withdrawal amount must be greater than 0 and not more than the balance!"
+            puts "Сумма вывода должна быть больше 0 и не больше баланса!"
             withdraw()    
         end
 

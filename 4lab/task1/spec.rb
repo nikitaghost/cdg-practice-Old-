@@ -5,7 +5,7 @@ RSpec.describe ATM do
     
     it '#start balance' do
       allow_any_instance_of(Kernel).to receive(:gets).and_return('b', 'q')
-      expect { subject.menu }.to output("Меню: \n\"D\" - Внести деньги;\n\"W\" - Вывести деньги;\n\"B\" - Проверить баланс;\n\"Q\" - Выйти;\nBalance is 100.0\nМеню: \n\"D\" - Внести деньги;\n\"W\" - Вывести деньги;\n\"B\" - Проверить баланс;\n\"Q\" - Выйти;\n").to_stdout
+      expect { subject.menu }.to output("Меню: \n\"D\" - Внести деньги;\n\"W\" - Вывести деньги;\n\"B\" - Проверить баланс;\n\"Q\" - Выйти;\nБаланс: 100.0\nМеню: \n\"D\" - Внести деньги;\n\"W\" - Вывести деньги;\n\"B\" - Проверить баланс;\n\"Q\" - Выйти;\n").to_stdout
     end
 
     it '#deposit' do
