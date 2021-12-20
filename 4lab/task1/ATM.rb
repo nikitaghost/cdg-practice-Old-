@@ -54,39 +54,36 @@ class ATM
 
     end
 
+    def quit()
+        File.write(BALANCE_PATH, @balance) 
+    end
+
     def menu()
 
-        loop do
+        items = ["\"D\" - Внести деньги;", "\"W\" - Вывести деньги;", "\"B\" - Проверить баланс;", "\"Q\" - Выйти;"]
 
-            items = ["\"D\" - Внести деньги;", "\"W\" - Вывести деньги;", "\"B\" - Проверить баланс;", "\"Q\" - Выйти;"]
-    
-            puts "Меню: "
-            items.each {|item| puts item}
+        puts "Меню: "
 
-            selected_index = gets.chomp
-      
-            case selected_index.upcase
-            when 'D'
-              deposit
-              break
-            when 'W'
-              withdraw
-              break
-            when 'B'
-              balance
-              break
-            end
-            break if selected_index.upcase == "Q"
+        items.each {|item| puts item}
 
+        selected_index = gets.chomp
+
+        if selected_index.upcase == 'D'
+            deposit()
+        elsif selected_index.upcase == 'W'
+            withdraw()
+        elsif selected_index.upcase == 'B'
+            balance()
+        elsif selected_index.upcase == 'Q' 
+            quit()
+        else
             puts "Введите корректную команду!"
-          
+            menu()
         end
-
-        File.write(BALANCE_PATH, @balance) 
     
     end
 
 end
 
-atm = ATM.new
-atm.menu
+# atm = ATM.new
+# atm.menu

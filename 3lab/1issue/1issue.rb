@@ -45,3 +45,5 @@ def delete(id)
     File.delete($buffer) if File.exist?($buffer)
 
 end
+
+puts index()

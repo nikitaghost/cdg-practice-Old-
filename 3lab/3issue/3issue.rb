@@ -1,5 +1,3 @@
-require "rspec"
-
 BALANCE_PATH = "balance.txt"
 START_BALANCE = 100.0
 
@@ -37,6 +35,7 @@ def deposit()
     if amount <= 0
         puts "Сумма депозита должна быть больше 0!"
         deposit()
+        return
     end
 
     $balance += amount
@@ -79,4 +78,4 @@ end
 $balance = File.readlines(BALANCE_PATH).first.to_f
 puts "Баланс: #{$balance}"
 
-menu()
+# menu()

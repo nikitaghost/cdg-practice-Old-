@@ -1,7 +1,10 @@
 def greeting()
 
+    print "Enter your name: "
     name = gets.chomp
+    print "Enter your surname: "
     surname = gets.chomp
+    print "Enter your age: "
     age = gets.to_i
 
     if age < 18
@@ -18,3 +21,10 @@ def foobar(first, second)
 
 end  
 
+# puts greeting()
+
+# print "Enter first number: "
+# first = gets.to_i
+# print "Enter second number: "
+# second = gets.to_i
+# puts foobar(first, second)

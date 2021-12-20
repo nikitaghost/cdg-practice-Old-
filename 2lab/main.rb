@@ -12,13 +12,15 @@ def addToPokemonsArray()
   name = nil
   color = nil
 
-  puts "Enter num of pokemons:"
+  print "Enter num of pokemons: "
   numOfPokemons = gets.to_i
 
   pokemonsArr = []
 
    for i in 1..numOfPokemons do
+      print "Enter pokemon name: "
       name = gets.chomp
+      print "Enter pokemon color: "
       color = gets.chomp
 
       pokemonHash = {name: name, color: color}
@@ -28,3 +30,13 @@ def addToPokemonsArray()
   return pokemonsArr
 
 end
+
+# def main()
+#   print "Enter word: " 
+#   word = gets.chomp
+#   puts exponentiationOrReverse(word)
+
+#   puts addToPokemonsArray()
+# end
+
+# main()
