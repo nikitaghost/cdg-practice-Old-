@@ -9,7 +9,7 @@ class PostsController
   
     def index
       @posts.each.with_index do |post, index|
-        puts "id:#{index}, \n\"#{post}\""
+        puts "id:#{index} \n\"#{post}\""
       end
     end
   
