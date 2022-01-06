@@ -1,7 +1,7 @@
 require 'rspec'
-require_relative 'ATM'
+require_relative 'CashMachine'
 
-RSpec.describe ATM do
+RSpec.describe CashMachine do
     
     it '#start balance' do
       allow_any_instance_of(Kernel).to receive(:gets).and_return('b', 'q')

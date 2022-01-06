@@ -1,4 +1,4 @@
-class ATM
+class CashMachine
 
     BALANCE_PATH = "balance.txt"
     DEFAULT_BALANCE = 100.0

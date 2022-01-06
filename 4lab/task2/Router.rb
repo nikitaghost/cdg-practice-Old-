@@ -16,7 +16,12 @@ class Router
             choice = gets.chomp.upcase.strip
 
             PostsController.connection(@routes['posts']) if choise == '1'
-            break if choise == 'q'
+            CommentsController.connection(@routes['comments']) if choise == '2'
+            break if choise == 'Q'
+        end
+
+        puts 'Good bye!'
+
     end
 
     def resources(class, keyword)
