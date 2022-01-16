@@ -85,5 +85,5 @@ class CashMachine
 
 end
 
-# atm = ATM.new
-# atm.menu
+# cashMachine = CashMachine.new
+# cashMachine.menu
