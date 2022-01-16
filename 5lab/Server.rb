@@ -3,11 +3,36 @@ require 'rack'
 require 'rack/utils'
 require_relative 'CashMachine'
 
+def call(map, env)
+    req = Rack::Request.new(env)
+    case req.path
+    when '/deposit'
+        if (map.include?("value"))
+            answer = @cashMachine.deposit(map["value"].to_i)
+            [answer[:code], {'Content-Type' => 'text/html'}, [answer[:text]]]
+        else
+            [401, { "Content-Type" => "text/html" }, ["Enter value for deposit"]]
+        end
+    when '/withdraw'
+        if (map.include?("value"))
+            answer = @cashMachine.withdraw(map["value"].to_i)
+            [answer[:code], {'Content-Type' => 'text/html'}, [answer[:text]]]
+        else
+            [401, { "Content-Type" => "text/html" }, ["Enter value for withdraw"]]
+        end
+    when '/balance'
+        answer = @cashMachine.balance()
+        [answer[:code], {'Content-Type' => 'text/html'}, [answer[:text]]]
+    else
+        [404, {'Content-Type' => 'text/html'}, ["Not found"]]
+    end
+end
+
 def main
 
     server = TCPServer.new('188.227.35.77', 3000)
 
-    cashMachine = CashMachine.new
+    @cashMachine = CashMachine.new
 
     while connection = server.accept
         request = connection.gets
@@ -23,7 +48,7 @@ def main
             end
         end
         
-        status, headers, body = cashMachine.call(@map, {
+        status, headers, body = call(@map, {
         'REQUEST_METHOD' => method,
         'PATH_INFO' => path,
         })
