@@ -1,10 +1,4 @@
-require 'socket'
-require 'rack'
-require 'rack/utils'
-
-server = TCPServer.new('188.227.35.77', 3000)
-
-class ATM
+class CashMachine
 
     BALANCE_PATH = "balance.txt"
     DEFAULT_BALANCE = 100.0
@@ -55,15 +49,19 @@ class ATM
 
     end
 
-    def call(value, env)
+    def call(map, env)
         req = Rack::Request.new(env)
         case req.path
         when '/deposit'
-            answer = deposit(value)
-            [answer[:code], {'Content-Type' => 'text/html'}, [answer[:text]]]
+            if (map.include?("value"))
+                answer = deposit(map["value"].to_i)
+                [answer[:code], {'Content-Type' => 'text/html'}, [answer[:text]]]
+            end
         when '/withdraw'
-            answer = withdraw(value)
-            [answer[:code], {'Content-Type' => 'text/html'}, [answer[:text]]]
+            if (map.include?("value"))
+                answer = withdraw(map["value"].to_i)
+                [answer[:code], {'Content-Type' => 'text/html'}, [answer[:text]]]
+            end
         when '/balance'
             answer = balance()
             [answer[:code], {'Content-Type' => 'text/html'}, [answer[:text]]]
@@ -72,38 +70,4 @@ class ATM
         end
     end
 
-end
-
-atm = ATM.new
-
-while connection = server.accept
-    request = connection.gets
-    method, full_path = request.split(' ')
-    path = full_path.split('?')[0]
-    
-    @value = nil
-    if full_path.split('?')[1] != nil
-        params = full_path.split('?')[1].split('&') if full_path.split('?')[1] != nil
-        params.each do |var|
-            if var.split('=')[0] == "value"
-                @value = var.split('=')[1] if var.split('=')[0] == "value"
-                @value = @value.to_i
-            end
-        end
-    end
-
-    status, headers, body = atm.call(@value, {
-    'REQUEST_METHOD' => method,
-    'PATH_INFO' => path,
-    })
-
-    connection.print("HTTP/1.1 #{status}\r\n")
-
-    headers.each { |key, value|  connection.print("#{key}: #{value}\r\n") }
-
-    connection.print "\r\n"
-
-    body.each { |part| connection.print(part) }
-
-    connection.close
 end
