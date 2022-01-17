@@ -1,0 +1,34 @@
+<%= stylesheet_link_tag "application" %> <br><br>
+<h1>My Labs</h1>
+
+<button type="button" class="btn btn-outline-success" class="upload_new_lab_btn"><%= link_to "New Lab", new_lab_path%></button><br><br>
+
+<% flash.each do |type, msg| %>
+  <div class="alert alert-<%= type %>">
+    <%= msg %>
+  </div>
+<% end %>
+
+<table class="table table-striped">
+  <thead  >
+    <tr>
+      <th scope="col">Title</th>
+      <th scope="col">Description</th>
+      <th scope="col">Grade</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @labs.each do |lab| %>
+      <tr>
+        <td><%= lab.title %></td>
+        <td><%= lab.description %></td>
+        <td><%= lab.grade %></td>
+        <td><button type="button" class="btn btn-outline-primary"><%= link_to "Edit", edit_lab_path(lab) %></button></td>
+        <td><button type="button" class="btn btn-outline-secondary"><%= link_to "Detailed", lab_path(lab) %></button></td>
+        <td><button type="button" class="btn btn-outline-warning"><%= link_to "Add mark", mark_lab_path(lab) %></button></td>
+        <td><button type="button" class="btn btn-outline-danger"><%= link_to "Delete", lab_path(lab), method: :delete, data: {confirm: "Are you sure?"} %></button></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
